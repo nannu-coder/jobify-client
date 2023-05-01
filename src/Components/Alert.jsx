@@ -1,5 +1,8 @@
+import useAppProvider from "../Hooks/useAppProvider";
+
 const Alert = () => {
-  return <div className="alert alert-danger">alert goes here</div>;
+  const { alertType, alertText } = useAppProvider();
+  return <div className={`alert alert-${alertType}`}>{alertText}</div>;
 };
 
 export default Alert;
