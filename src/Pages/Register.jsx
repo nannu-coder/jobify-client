@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Wrapper from "../assets/Wrappers/RegisterPage";
 import Logo from "../Components/Logo";
 import FormRow from "../Components/FormRow";
 import Alert from "../Components/Alert";
 import useAppProvider from "../Hooks/useAppProvider";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -14,7 +15,9 @@ const initialState = {
 
 const Register = () => {
   const [values, setValues] = useState(initialState);
-  const { showAlert, displayAlert } = useAppProvider();
+  const { showAlert, displayAlert, isLoading, registerUer, user, loginUser } =
+    useAppProvider();
+  const navigate = useNavigate();
 
   const toogleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -31,8 +34,22 @@ const Register = () => {
       displayAlert();
       return;
     }
-    console.log(values);
+
+    const currentUser = { name, email, password };
+    if (isMember) {
+      loginUser(currentUser);
+    } else {
+      registerUer(currentUser);
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (user) {
+        navigate("/");
+      }
+    }, 300);
+  }, [user, navigate]);
 
   return (
     <Wrapper className="full-page">
@@ -44,39 +61,34 @@ const Register = () => {
         {showAlert && <Alert />}
         {/* name field */}
         <div className="form-row">
-          {/* <label htmlFor="name" className="form-label">
-            name
-          </label> */}
-
           {/* Name Field */}
 
           {!values.isMember && (
             <FormRow
               type="text"
               value={values.name}
-              name="Name"
-              onChange={handleChange}
+              name="name"
+              handleChange={handleChange}
             />
           )}
 
           {/* Email Field */}
           <FormRow
-            type="text"
+            type="email"
             value={values.email}
-            name="Email"
-            onChange={handleChange}
+            name="email"
+            handleChange={handleChange}
           />
-
           {/* Password Field */}
           <FormRow
             type="password"
             value={values.password}
-            name="Password"
-            onChange={handleChange}
+            name="password"
+            handleChange={handleChange}
           />
         </div>
 
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
           {!values.isMember ? "Register" : "Login"}
         </button>
 
