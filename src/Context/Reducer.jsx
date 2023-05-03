@@ -4,11 +4,13 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER_BEGIN,
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   TOGGLE_SIDEBAR,
 } from "./Action";
+import { initialState } from "./AppProvider";
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {
@@ -93,6 +95,13 @@ const reducer = (state, action) => {
 
   if (action.type === TOGGLE_SIDEBAR) {
     return { ...state, showSidebar: !state.showSidebar };
+  }
+
+  if (action.type === LOGOUT_USER) {
+    return {
+      ...initialState,
+      isLoading: false,
+    };
   }
 
   throw new Error(`no such action :${action.type}`);

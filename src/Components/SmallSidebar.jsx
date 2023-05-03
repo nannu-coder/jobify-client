@@ -1,6 +1,8 @@
 import useAppProvider from "../Hooks/useAppProvider";
 import Wrapper from "../assets/Wrappers/SmallSidebar";
 import Logo from "./Logo";
+import { FaTimes } from "react-icons/fa";
+import NavLinks from "./NavLinks";
 
 const SmallSidebar = () => {
   const { showSidebar, toggleSidebar } = useAppProvider();
@@ -13,12 +15,12 @@ const SmallSidebar = () => {
       >
         <div className="content">
           <button type="button" className="close-btn" onClick={toggleSidebar}>
-            {/* <FaTimes /> */}
+            <FaTimes />
           </button>
           <header>
             <Logo />
           </header>
-          {/* <NavLinks toggleSidebar={toggleSidebar} /> */}
+          <NavLinks toggleSidebar={toggleSidebar} />
         </div>
       </div>
     </Wrapper>

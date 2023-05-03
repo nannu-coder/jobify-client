@@ -6,6 +6,7 @@ import {
   LOGIN_USER_BEGIN,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
   REGISTER_USER_BEGIN,
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
@@ -17,7 +18,7 @@ const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
 const userLocation = localStorage.getItem("location");
 
-const initialState = {
+export const initialState = {
   showAlert: true,
   alertText: "",
   alertType: "",
@@ -118,7 +119,8 @@ const AppProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
-    console.log("Logout");
+    dispatch({ type: LOGOUT_USER });
+    removeUserFromLocalStorage();
   };
 
   return (

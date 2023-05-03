@@ -1,6 +1,7 @@
 import useAppProvider from "../Hooks/useAppProvider";
 import Wrapper from "../assets/Wrappers/BigSidebar";
 import Logo from "./Logo";
+import NavLinks from "./NavLinks";
 const BigSidebar = () => {
   const { showSidebar } = useAppProvider();
 
@@ -15,7 +16,7 @@ const BigSidebar = () => {
           <header>
             <Logo />
           </header>
-          {/* <NavLinks /> */}
+          <NavLinks />
         </div>
       </div>
     </Wrapper>
