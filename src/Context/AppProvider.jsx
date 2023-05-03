@@ -11,6 +11,9 @@ import {
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   TOGGLE_SIDEBAR,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_SUCCESS,
 } from "./Action";
 import axios from "axios";
 
@@ -124,7 +127,31 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
-    console.log(currentUser);
+    dispatch({ type: UPDATE_USER_BEGIN });
+    try {
+      const { data } = await axios.patch(
+        "http://localhost:5000/api/v1/auth/upadteUser",
+        currentUser,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      const { user, location, token } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user, location, token },
+      });
+      addUserToLocalStorage({ user, location, token });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   return (
