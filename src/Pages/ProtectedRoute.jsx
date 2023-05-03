@@ -1,14 +1,15 @@
+import Loading from "../Components/Loading";
 import useAppProvider from "../Hooks/useAppProvider";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, isLoading } = useAppProvider();
+  const { user, userLoading } = useAppProvider();
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
+  // if (userLoading) {
+  //   return <Loading center />;
+  // }
 
-  if (!isLoading && !user) {
+  if (!user) {
     return <Navigate to="/landing" />;
   }
 
