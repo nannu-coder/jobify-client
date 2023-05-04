@@ -91,7 +91,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
       const response = await axios.post(
-        "https://mern-jobify-server.vercel.app/api/v1/auth/register",
+        "https://jobify-server-kohl.vercel.app/api/v1/auth/register",
         currentUser,
         {
           withCredentials: true,
@@ -133,7 +133,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGIN_USER_BEGIN });
     try {
       const { data } = await axios.post(
-        "https://mern-jobify-server.vercel.app/api/v1/auth/login",
+        "https://jobify-server-kohl.vercel.app/api/v1/auth/login",
         currentUser
       );
       const { user, token, location } = data;
@@ -166,7 +166,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
       const { data } = await axios.patch(
-        "https://mern-jobify-server.vercel.app/api/v1/auth/upadteUser",
+        "https://jobify-server-kohl.vercel.app/api/v1/auth/upadteUser",
         currentUser,
         {
           withCredentials: true,
@@ -207,7 +207,7 @@ const AppProvider = ({ children }) => {
       const { position, company, jobLocation, jobType, status } = state;
 
       await axios.post(
-        "https://mern-jobify-server.vercel.app/api/v1/jobs",
+        "https://jobify-server-kohl.vercel.app/api/v1/jobs",
         {
           company,
           position,
@@ -239,7 +239,7 @@ const AppProvider = ({ children }) => {
 
   const getJobs = async () => {
     const { search, searchStatus, searchType, sort, page } = state;
-    let url = `https://mern-jobify-server.vercel.app/api/v1/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    let url = `https://jobify-server-kohl.vercel.app/api/v1/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
 
     if (search) {
       url = url + `&search=${search}`;
@@ -274,7 +274,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: DELETE_JOB_BEGIN });
     try {
       await axios.delete(
-        `https://mern-jobify-server.vercel.app/api/v1/jobs/${id}`,
+        `https://jobify-server-kohl.vercel.app/api/v1/jobs/${id}`,
         {
           withCredentials: true,
           headers: {
@@ -294,7 +294,7 @@ const AppProvider = ({ children }) => {
       const { position, company, jobLocation, jobType, status } = state;
 
       await axios.patch(
-        `https://mern-jobify-server.vercel.app/api/v1/jobs/${state.editJobId}`,
+        `https://jobify-server-kohl.vercel.app/api/v1/jobs/${state.editJobId}`,
         {
           company,
           position,
@@ -327,7 +327,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
       const { data } = await axios.get(
-        "https://mern-jobify-server.vercel.app/api/v1/jobs/stats",
+        "https://jobify-server-kohl.vercel.app/api/v1/jobs/stats",
         {
           withCredentials: true,
           headers: {
