@@ -3,12 +3,6 @@ import Wrapper from "../../assets/Wrappers/SharedLayout";
 import SmallSidebar from "../../Components/SmallSidebar";
 import BigSidebar from "../../Components/BigSidebar";
 import Navbar from "../../Components/Navbar";
-{
-  /* <Link to="/addjob">Add Job</Link>
-<Link to="/alljob">All Job</Link>
-<Link to="/profile">Profile</Link>
-<Link to="/">Stats</Link> */
-}
 
 const Layout = () => {
   return (

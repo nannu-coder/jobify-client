@@ -4,11 +4,9 @@ import AppProvider from "./Context/AppProvider";
 
 function App() {
   return (
-    <>
-      <AppProvider>
-        <RouterProvider router={router} />
-      </AppProvider>
-    </>
+    <AppProvider>
+      <RouterProvider router={router} />
+    </AppProvider>
   );
 }
 
