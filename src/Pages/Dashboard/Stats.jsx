@@ -1,8 +1,25 @@
+import { useEffect } from "react";
+import Loading from "../../Components/Loading";
+import useAppProvider from "../../Hooks/useAppProvider";
+import StatsContainer from "../../Components/StatsContainer";
+import ChartsContainer from "../../Components/ChartsContainer";
+
 const Stats = () => {
+  const { showStats, isLoading, monthlyApplications } = useAppProvider();
+
+  useEffect(() => {
+    showStats();
+  }, []);
+
+  if (isLoading) {
+    return <Loading center />;
+  }
+
   return (
-    <div>
-      <h1>Stats</h1>
-    </div>
+    <>
+      <StatsContainer />
+      {monthlyApplications.length > 0 && <ChartsContainer />}
+    </>
   );
 };
 

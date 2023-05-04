@@ -1,5 +1,7 @@
 import {
+  CHANGE_PAGE,
   CLEAR_ALERT,
+  CLEAR_FILTERS,
   CLEAR_VALUES,
   CREATE_JOB_BEGIN,
   CREATE_JOB_ERROR,
@@ -20,6 +22,8 @@ import {
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   SET_EDIT_JOB,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
   TOGGLE_SIDEBAR,
   UPDATE_USER_BEGIN,
   UPDATE_USER_ERROR,
@@ -246,6 +250,32 @@ const reducer = (state, action) => {
       alertType: "danger",
       alertText: action.payload.msg,
     };
+  }
+
+  if (action.type === SHOW_STATS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+  if (action.type === SHOW_STATS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      stats: action.payload.stats,
+      monthlyApplications: action.payload.monthlyApplications,
+    };
+  }
+
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: "",
+      searchStatus: "all",
+      searchType: "all",
+      sort: "latest",
+    };
+  }
+
+  if (action.type === CHANGE_PAGE) {
+    return { ...state, page: action.payload.page };
   }
 
   throw new Error(`no such action :${action.type}`);
